@@ -1,17 +1,11 @@
 const fs = require('fs');
 
 function makeDir(root) {
-    const path = require("path");
-
-    if (path.existsSync(root)) {
+    if (fs.existsSync(root)) {
         return "error: project exists!"
     }
-
-    fs.mkdirSync(root, 755);
-    fs.existsSync(root + "/")
+    fs.mkdirSync(root);
 }
-
-
 
 exports.command = 'new';
 
@@ -21,6 +15,7 @@ exports.builder = {
 };
 
 exports.handler = function (argv) {
-    console.log("make new project : " +argv._[0])
-
+    const pn = argv._[1];
+    console.log("make new project : " +argv._[1]);
+    makeDir(pn)
 };
