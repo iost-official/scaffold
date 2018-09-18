@@ -29,8 +29,9 @@ exports.handler = function (argv) {
         "   }" + "\n" +
         "   init() {" + "\n" +
         "   }" + "\n" +
-        "}";
-    content = content.replace("ContractName", argv.name);
+        "};" + "\n" +
+        "module.exports = ContractName;";
+    content = content.replace(/ContractName/g, argv.name);
     util.writeFile(path, content);
 
     var abi = {};
