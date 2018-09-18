@@ -1,7 +1,18 @@
 #!/usr/bin/env node
-const argv = require('yargs')
-    .command('$0', 'help', () => {}, (argv) => {
-        console.log('add help here')
-    })
-    .command(require('./new'))
+var yargs = require('yargs');
+var argv = yargs
+    .usage('Usage: $0 <cmd> [args]')
+    .command(require('./new.js'))
+    .command(
+        'add <item>',
+        'add a new [contract|function]',
+        function() {
+            return yargs
+                .usage('Usage: $0 add <item> [args]')
+                .command(require('./add_contract.js'))
+                .command(require('./add_function.js'))
+                .alias('h', 'help')
+        }
+    )
+    .alias('h', 'help')
     .argv;

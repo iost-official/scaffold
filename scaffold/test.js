@@ -1,4 +1,11 @@
-const util = require('./util.js');
+const fs = require('fs');
+
+function makeDir(root) {
+    if (fs.existsSync(root)) {
+        return "error: project exists!"
+    }
+    fs.mkdirSync(root);
+}
 
 exports.command = 'new <name>';
 
@@ -13,9 +20,9 @@ exports.builder = (yargs) => {
 
 exports.handler = function (argv) {
     console.log("make directory: " + argv.name);
-    var err = util.makeDir(argv.name);
+    var err = makeDir(argv.name);
     if (err !== undefined) {
-        console.error(err.red);
+        console.error(err);
         return;
     }
 
