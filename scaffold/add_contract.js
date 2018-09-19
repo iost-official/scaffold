@@ -23,7 +23,9 @@ exports.handler = function (argv) {
         return;
     }
 
-    var content = "class ContractName" + "\n" +
+    var content = "const storage = require('../libjs/storage.js');" + "\n" +
+        "const BlockChain = require('../libjs/blockchain.js');" + "\n\n" +
+        "class ContractName" + "\n" +
         "{" + "\n" +
         "   constructor() {" + "\n" +
         "   }" + "\n" +

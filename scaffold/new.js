@@ -1,4 +1,5 @@
 const util = require('./util.js');
+const fse = require('fs-extra');
 
 exports.command = 'new <name>';
 
@@ -19,12 +20,16 @@ exports.handler = function (argv) {
         return;
     }
 
-    console.log("make directory: " + argv.name + "/contract")
-    makeDir(argv.name + "/contract");
-    console.log("make directory: " + argv.name + "/abi")
-    makeDir(argv.name + "/abi");
-    console.log("make directory: " + argv.name + "/test")
-    makeDir(argv.name + "/test");
+    console.log("make directory: " + argv.name + "/contract");
+    util.makeDir(argv.name + "/contract");
+    console.log("make directory: " + argv.name + "/abi");
+    util.makeDir(argv.name + "/abi");
+    console.log("make directory: " + argv.name + "/test");
+    util.makeDir(argv.name + "/test");
+
+    console.log("make directory: " + argv.name + "/libjs");
+    libDir = __dirname + "/../libjs";
+    fse.copySync(libDir, argv.name + "/libjs");
 
     return;
 };

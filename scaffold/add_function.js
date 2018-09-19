@@ -29,7 +29,7 @@ exports.handler = function (argv) {
     // parse param array
     var param = argv.param;
     if (param.length % 2 != 0) {
-        console.error(("param should include both param name and type. got parameter length = " + param.length).yellow)
+        console.error(("param should include both param name and type. got parameter length = " + param.length).yellow);
         return;
     }
     var paramName = [];
