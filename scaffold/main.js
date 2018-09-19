@@ -11,6 +11,7 @@ var argv = yargs
                 .usage('Usage: $0 add <item> [args]')
                 .command(require('./add_contract.js'))
                 .command(require('./add_function.js'))
+                .command(require('./add_test.js'))
                 .alias('h', 'help')
         }
     )

@@ -23,14 +23,16 @@ exports.handler = function (argv) {
         return;
     }
 
-    var content = "const storage = require('../libjs/storage.js');" + "\n" +
-        "const BlockChain = require('../libjs/blockchain.js');" + "\n\n" +
+    var content = "const rstorage = require('../libjs/storage.js');" + "\n" +
+        "const rBlockChain = require('../libjs/blockchain.js');" + "\n" +
+        "var storage = new rstorage();" + "\n" +
+        "var BlockChain = new rBlockChain();" + "\n\n" +
         "class ContractName" + "\n" +
         "{" + "\n" +
-        "   constructor() {" + "\n" +
-        "   }" + "\n" +
-        "   init() {" + "\n" +
-        "   }" + "\n" +
+        "    constructor() {" + "\n" +
+        "    }" + "\n" +
+        "    init() {" + "\n" +
+        "    }" + "\n" +
         "};" + "\n" +
         "module.exports = ContractName;";
     content = content.replace(/ContractName/g, argv.name);

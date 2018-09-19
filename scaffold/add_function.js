@@ -23,6 +23,7 @@ exports.handler = function (argv) {
     path = "./contract/" + argv.con_name + ".js";
     if (!fs.existsSync(path)) {
         console.error(("contract file not exists! path = " + path).yellow);
+        return;
     }
     source = fs.readFileSync(path, 'utf-8');
 
@@ -81,7 +82,7 @@ exports.handler = function (argv) {
     }
 
     // insert function
-    var content = "\n   " + argv.func_name + '(';
+    var content = "\n    " + argv.func_name + '(';
     for (let i in paramName) {
         content += paramName[i];
         if (i < paramName.length - 1) {
@@ -90,7 +91,7 @@ exports.handler = function (argv) {
     }
     content += ')';
     content += ' {' + '\n' +
-        '   ' + '}';
+        '    ' + '}';
     newSource = source.slice(0, pos) + content + source.slice(pos);
     console.log("add function " + argv.func_name + "() to " + path);
     util.writeFile(path, newSource);
