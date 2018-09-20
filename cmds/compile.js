@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fse = require('fs-extra');
 const util = require('./util.js');
 const genAbi = require('./libjs/contract.js');
 
@@ -48,21 +49,32 @@ function abiMatch(a, b) {
 
 exports.handler = function (argv) {
     var path = "./contract/" + argv.name + ".js";
+    var abiPath = "./abi/" + argv.name + ".json";
+    if (!fs.existsSync("./build/")) {
+        util.makeDir("./build/");
+    }
+    console.log("compile " + path + " and " + abiPath);
+
     if (!fs.existsSync(path)) {
         console.error(("contract file not exists! path = " + path).yellow);
     }
     source = fs.readFileSync(path, 'utf-8');
 
-    var eabi = genAbi(source)[1];
+    var newSource, eabi;
+    [newSource, eabi] = genAbi(source);
 
-    var abiPath = "./abi/" + argv.name + ".json";
     var abiStr = fs.readFileSync(abiPath, 'utf-8');
 
     if (!abiMatch(JSON.parse(eabi), JSON.parse(abiStr))) {
         console.error(("expected abi mismatch! expected = " + eabi + ", got " + abiStr).yellow);
         return;
     }
-    console.log("compile " + path + " and " + abiPath + " successfully");
+    fse.copySync(abiPath, "./build/" + argv.name + ".json");
+    console.log("compile " + abiPath + " successfully");
+
+    var newContract = "./build/" + argv.name + ".js";
+    util.writeFile(newContract, newSource);
+    console.log("generate file " + newContract + " successfully");
 
     return;
 };
