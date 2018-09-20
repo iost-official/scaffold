@@ -16,5 +16,6 @@ var argv = yargs
         }
     )
     .command(require('./compile.js'))
+    .command(require('./test.js'))
     .alias('h', 'help')
     .argv;
