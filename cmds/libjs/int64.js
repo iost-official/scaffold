@@ -1,4 +1,5 @@
 'use strict';
+const BigNumber = require('./bignumber.js');
 
 const MaxInt64 = new BigNumber('9223372036854775807');
 const MinInt64 = new BigNumber('-9223372036854775808');

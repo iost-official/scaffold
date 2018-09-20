@@ -34,7 +34,7 @@ exports.handler = function (argv) {
         "    init() {" + "\n" +
         "    }" + "\n" +
         "};" + "\n" +
-        "module.exports = ContractName;";
+        "module.exports = ContractName;\n";
     content = content.replace(/ContractName/g, argv.name);
     util.writeFile(path, content);
 

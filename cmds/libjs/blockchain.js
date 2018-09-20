@@ -1,4 +1,4 @@
-var Int64 = require('int64.js');
+var Int64 = require('./int64.js');
 
 class BlockChain
 {
