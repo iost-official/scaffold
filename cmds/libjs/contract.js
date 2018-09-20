@@ -106,7 +106,7 @@ function processContract(source) {
 		}
 	}
 
-	newSource = 'use strict;\n';
+	newSource = '\"use strict\";\n';
 	for (var i in validRange) {
 		var r = validRange[i];
     	newSource += source.slice(r[0], r[1]) + "\n";
