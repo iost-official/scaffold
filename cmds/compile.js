@@ -1,6 +1,6 @@
 const fs = require('fs');
 const util = require('./util.js');
-const genAbi = require('../libjs/contract.js');
+const genAbi = require('./libjs/contract.js');
 
 exports.command = 'compile <name>';
 

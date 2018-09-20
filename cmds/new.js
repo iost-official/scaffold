@@ -28,7 +28,7 @@ exports.handler = function (argv) {
     util.makeDir(argv.name + "/test");
 
     console.log("make directory: " + argv.name + "/libjs");
-    libDir = __dirname + "/../libjs";
+    libDir = __dirname + "/./libjs";
     fse.copySync(libDir, argv.name + "/libjs");
 
     return;
