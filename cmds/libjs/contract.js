@@ -5,6 +5,24 @@ var esprima = require('esprima/dist/esprima.js');
 var lang = "javascript";
 var version = "1.0.0";
 
+function isStaticConstantsDecl(stat){
+	if (!stat || stat === null) {
+		return false;
+	}
+	if (stat.type === "VariableDeclaration") {
+		
+		if(stat.declarations[0].init&&stat.declarations[0].init.type ==='CallExpression'||
+		stat.declarations[0].id&&stat.declarations[0].id.name ==='blockchain'||
+		stat.declarations[0].id&&stat.declarations[0].id.name ==='storage'
+		){
+			return false;
+		}
+		
+		return true;
+	}
+	return false;
+}
+
 function isClassDecl(stat) {
 	if (!stat || stat === null) {
 		return false;
@@ -88,11 +106,11 @@ function processContract(source) {
 	var className;
 	for (var i in ast.body) {
 		var stat = ast.body[i];
-
-		if (isClassDecl(stat)) {
+		if (isStaticConstantsDecl(stat)){
 			validRange.push(stat.range);
-		}
-		else if (stat.type === "ExpressionStatement" && isExport(stat.expression)) {
+		}else if (isClassDecl(stat)) {
+			validRange.push(stat.range);
+		}else if (stat.type === "ExpressionStatement" && isExport(stat.expression)) {
 			validRange.push(stat.range);
 			className = getExportName(stat.expression);
 		}
