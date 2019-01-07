@@ -26,7 +26,7 @@ exports.handler = function (argv) {
     var content = "const rstorage = require('../libjs/storage.js');" + "\n" +
         "const rBlockChain = require('../libjs/blockchain.js');" + "\n" +
         "const storage = new rstorage();" + "\n" +
-        "const BlockChain = new rBlockChain();" + "\n\n" +
+        "const blockchain = new rBlockChain();" + "\n\n" +
         "class ContractName" + "\n" +
         "{" + "\n" +
         "    constructor() {" + "\n" +
