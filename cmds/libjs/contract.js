@@ -1,6 +1,7 @@
 'use strict';
 
 var esprima = require('esprima/dist/esprima.js');
+var escodegen = require('escodegen');
 
 var lang = "javascript";
 var version = "1.0.0";
@@ -129,6 +130,7 @@ function processContract(source) {
 		var r = validRange[i];
     	newSource += source.slice(r[0], r[1]) + "\n";
 	}
+	newSource = escodegen.generate( esprima.parse(newSource));
 
 	var abi = {};
 	abi["lang"] = lang;
